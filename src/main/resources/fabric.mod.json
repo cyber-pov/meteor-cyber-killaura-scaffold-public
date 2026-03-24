@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "meteor-cyber-ka-scaffold",
   "version": "1.0.0",
-  "name": "Meteor Cyber KA + Scaffold",
+  "name": "Meteor Cyber KillAura + Scaffold",
   "description": "Meteor addon containing KillAuraPlus and ScaffoldPlus.",
   "authors": [
     "xs"

@@ -1,4 +1,4 @@
-# Meteor Cyber KA + Scaffold
+# Meteor Cyber KillAura + Scaffold
 
 Contains:
 
@@ -12,8 +12,6 @@ Also includes:
 - `MovementCorrection`
 - `RotationTiming`
 - client-side mixins used for packet rotation and movement correction
-
-## Notes
 
 ## Build
 
