@@ -13,6 +13,13 @@ Also includes:
 - `RotationTiming`
 - client-side mixins used for packet rotation and movement correction
 
+## Compatibility
+
+- Minecraft: `1.21.11`
+- Meteor Client: `1.21.11`
+- Fabric Loader: `0.18.1+`
+- Built with Fabric Loader: `0.18.4`
+
 ## Build
 
 ```bash
