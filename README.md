@@ -1,40 +1,44 @@
 # meteor-cyber-addon
 
-Meteor Client addon with Cyber combat and utility modules.
+Meteor Client addon with combat, movement, player, render, and world modules.
 
-## Features
+## Compatibility
 
-### Modules (Cyber category)
-- `trigger-bot`: Instantly attacks when your crosshair is on a valid target.
-- `item-id`: Shows the hovered item's registry ID in tooltips.
-- `auto-tool+`: Automatically switches to the most effective mining tool.
-- `sprint+`: Automatically sprints with vanilla-like conditions.
+- Minecraft `1.21.11`
+- Meteor Client `1.21.11`
+- Java `21+`
+- Fabric Loader `0.18.1+`
+- Built with Fabric Loader `0.18.4`
+
+## Included
+
+### Modules
+- Combat: `KillAuraPlus`, `TriggerBot`, `AutoWeaponPlus`
+- Movement: `ScaffoldPlus`, `SprintPlus`
+- Player: `AutoEatPlus`, `AutoReconnectPlus`, `AutoToolPlus`, `AutoChat`, `Mc265322Fix`
+- Render: `ItemID`, `OreSim`, `OreReveal`
+- World: `NukerPlus`
 
 ### Commands
-- `.cpos` (`.copypos`): Copy your current coordinates to clipboard.
-- `.sping` (`.ping`): Show current server ping in ms.
-
-## Requirements
-- Java 21+
-- Minecraft `1.21.11`
-- Fabric Loader `>=0.18.2`
-- Meteor Client
+- `.cpos` / `.copypos`
+- `.sping` / `.ping`
 
 ## Build
+
 ```bash
 ./gradlew build
 ```
 
 Built jar:
-- `build/libs/meteor-cyber-1.0.0.jar` (current version)
+
+- `build/libs/meteor-cyber-1.0.0.jar`
 
 ## Install
-1. Build the jar.
-2. Put the jar in your Minecraft `mods` folder.
-3. Start the game with Fabric + Meteor Client.
 
-## Disclaimer
-Compatibility with anti-cheat environments has been tuned, but behavior and detection outcomes are not guaranteed. Use at your own risk.
+1. Build the jar.
+2. Put the jar in your `mods` folder.
+3. Launch Minecraft with Fabric and Meteor Client.
 
 ## License
+
 GPL-3.0
