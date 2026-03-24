@@ -36,6 +36,17 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${property("loader_version")}")
     modCompileOnly("meteordevelopment:meteor-client:${property("meteor_version")}")
     modCompileOnly("meteordevelopment:baritone:${property("baritone_version")}-SNAPSHOT")
+    modLocalRuntime(files("../meteor-client/build/libs/meteor-client-1.21.11-local.jar"))
+    // Include local Baritone build for runClient (so ./gradlew runClient can load it without copying manually into another project's run/mods)
+    val baritoneRuntimeJars = file("../meteor-baritone/fabric/build/libs").let { dir ->
+        val shadow = fileTree(dir) { include("baritone-fabric-*SNAPSHOT-dev-shadow.jar") }.files
+        if (shadow.isNotEmpty()) {
+            shadow
+        } else {
+            fileTree(dir) { include("baritone-fabric-*SNAPSHOT.jar") }.files
+        }
+    }
+    modLocalRuntime(files(baritoneRuntimeJars))
     compileOnly("meteordevelopment:orbit:${property("orbit_version")}")
     runtimeOnly("meteordevelopment:orbit:${property("orbit_version")}")
     runtimeOnly("org.meteordev:starscript:${property("starscript_version")}")
@@ -54,6 +65,7 @@ java {
 }
 
 loom {
+    accessWidenerPath = file("src/main/resources/meteor-cyber.accesswidener")
     runConfigs.named("client") {
         programArgs.addAll(listOf("--username", "Dev"))
     }

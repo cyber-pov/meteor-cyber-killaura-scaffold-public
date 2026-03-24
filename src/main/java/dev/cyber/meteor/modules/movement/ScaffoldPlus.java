@@ -34,6 +34,23 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Scaffold — Technique=Normal, MovementCorrection=Silent, RotationTiming=Normal.
+ * Matches the LiquidBounce config verified to bypass Grim 2.0.
+ *
+ * Rotation approach (SILENT):
+ *   applyNow() feeds the scaffold yaw/pitch to RotationManager in TickEvent.Pre
+ *   WITHOUT touching mc.player.setYaw().  Four Mixins handle the rest:
+ *     ClientPlayerEntityMixin   — sends RotationManager yaw/pitch in PlayerMove packets
+ *     ClientPlayerInteractionManagerMixin — embeds RotationManager yaw/pitch in USE_ITEM
+ *     EntityMixin               — uses RotationManager yaw in updateVelocity()
+ *     KeyboardInputMixin        — corrects WASD input for the visual↔scaffold yaw delta
+ *   The player camera never visibly moves (true silent rotation).
+ *
+ * AimModulo360 fix (preserved from RotationManager.applyNow):
+ *   currentRotationYaw += wrapDegrees(target − currentRotationYaw)
+ *   Consecutive sent yaw values differ by ≤180° → Grim AimModulo360 cannot fire.
+ */
 public class ScaffoldPlus extends Module {
     private static final double PLACE_RANGE   = 4.5;
     private static final double EDGE_STRENGTH = 0.48;
@@ -74,9 +91,16 @@ public class ScaffoldPlus extends Module {
             return;
         }
 
+        // Small randomisation mimics human micro-movements.
         float jitYaw   = plan.yaw   + (float) ThreadLocalRandom.current().nextDouble(-0.3, 0.3);
         float jitPitch = plan.pitch + (float) ThreadLocalRandom.current().nextDouble(-0.3, 0.3);
 
+        // SILENT rotation: RotationManager accumulates yaw via delta internally.
+        // mc.player.getYaw() is NOT changed — camera stays at visual direction.
+        // ClientPlayerEntityMixin sends scaffold yaw in PlayerMove.
+        // ClientPlayerInteractionManagerMixin puts scaffold yaw in USE_ITEM.
+        // EntityMixin uses scaffold yaw in updateVelocity().
+        // KeyboardInputMixin corrects WASD for the yaw delta.
         RotationManager.INSTANCE.applyNow(jitYaw, jitPitch, this);
 
         BlockHitResult hit = new BlockHitResult(plan.hitPos, plan.direction, plan.interactedPos, false);

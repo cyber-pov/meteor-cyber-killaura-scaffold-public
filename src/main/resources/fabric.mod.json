@@ -1,14 +1,15 @@
 {
   "schemaVersion": 1,
-  "id": "meteor-cyber-ka-scaffold",
+  "id": "meteor-cyber",
   "version": "1.0.0",
-  "name": "Meteor Cyber KillAura + Scaffold",
-  "description": "Meteor addon containing KillAuraPlus and ScaffoldPlus.",
+  "name": "Meteor Cyber",
+  "description": "Meteor addon that adds Cyber utility modules.",
   "authors": [
     "xs"
   ],
   "license": "GPL-3.0",
   "environment": "client",
+  "accessWidener": "meteor-cyber.accesswidener",
   "mixins": [
     "meteor-cyber.mixins.json"
   ],

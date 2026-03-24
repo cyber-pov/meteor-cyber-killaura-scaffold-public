@@ -3,11 +3,21 @@
   "package": "dev.cyber.meteor.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "AnvilScreenAccessor",
+    "AnvilScreenMixin",
+    "SignBlockEntityAccessor",
+    "AbstractSignEditScreenMixin",
     "ClientPlayerEntityMixin",
-    "ClientPlayerInteractionManagerMixin",
+    "CountPlacementModifierAccessor",
     "EntityMixin",
+    "HeightRangePlacementModifierAccessor",
+    "KeybindTextContentMixin",
     "KeyboardInputMixin",
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "MinecraftClientMixin",
+    "RarityFilterPlacementModifierAccessor",
+    "TranslatableTextContentMixin",
+    "baritone.MineProcessMixin"
   ],
   "injectors": {
     "defaultRequire": 1

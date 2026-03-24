@@ -6,6 +6,15 @@ import net.minecraft.client.network.ClientPlayerInteractionManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+/**
+ * Ensures that the rotation embedded in the PlayerInteractBlockC2SPacket
+ * matches the rotation sent in the movement packet (hooked in ClientPlayerEntityMixin).
+ * Without this, Grim's BadPacketsJ check fires because the movement packet uses
+ * RotationManager's silent rotation while the interact packet uses the player's actual rotation.
+ *
+ * In 1.21.11, getYaw()/getPitch() are called in interactBlockInternal() on PlayerEntity,
+ * not in interactBlock() on ClientPlayerEntity.
+ */
 @Mixin(ClientPlayerInteractionManager.class)
 public abstract class ClientPlayerInteractionManagerMixin {
 

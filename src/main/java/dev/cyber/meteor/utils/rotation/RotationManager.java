@@ -64,11 +64,21 @@ public final class RotationManager {
         transientSilentTicks = 0;
     }
 
+    /**
+     * Immediately applies a rotation for the current tick with SILENT movement correction.
+     * Unlike requestRotation(), this takes effect right now (no stepping delay).
+     * transientSilentTicks=2 ensures the correction survives RotationManager's own
+     * onTick decrement regardless of which event handler fires first.
+     */
     public void applyNow(float yaw, float pitch, Module owner) {
         if (!initialized) {
             resetToPlayerRotation();
             initialized = true;
         }
+        // Add the MINIMAL angle delta to maintain yaw continuity.
+        // Never assign the wrapped target directly — that creates a ±360 jump
+        // between consecutive packets (e.g., accumulated 370 → scaffold 10 = delta 360)
+        // which Grim detects as AimModulo360.
         float delta = MathHelper.wrapDegrees(yaw - currentRotationYaw);
         currentRotationYaw   = currentRotationYaw + delta;
         currentRotationPitch = MathHelper.clamp(pitch, -90f, 90f);
