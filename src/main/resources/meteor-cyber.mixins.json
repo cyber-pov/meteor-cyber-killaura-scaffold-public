@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "dev.cyber.meteor.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ClientPlayerEntityMixin",
+    "ClientPlayerInteractionManagerMixin",
+    "EntityMixin",
+    "KeyboardInputMixin",
+    "LivingEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
